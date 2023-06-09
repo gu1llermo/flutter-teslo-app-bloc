@@ -80,6 +80,8 @@ class _LoginForm extends StatelessWidget {
               label: 'Correo',
               keyboardType: TextInputType.emailAddress,
               onChanged: context.read<LoginFormCubit>().onEmailChange,
+              onFieldSubmitted: (_) =>
+                  context.read<LoginFormCubit>().onFormSubmit(),
               errorMessage:
                   loginForm.isFormPosted ? loginForm.email.errorMessage : null,
             ),
@@ -88,6 +90,8 @@ class _LoginForm extends StatelessWidget {
               label: 'Contraseña',
               obscureText: true,
               onChanged: context.read<LoginFormCubit>().onPasswordChange,
+              onFieldSubmitted: (_) =>
+                  context.read<LoginFormCubit>().onFormSubmit(),
               errorMessage: loginForm.isFormPosted
                   ? loginForm.password.errorMessage
                   : null,

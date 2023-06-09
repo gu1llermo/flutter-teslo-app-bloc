@@ -34,9 +34,15 @@ class AppRouterCubit extends Cubit<GoRouter> {
               path: '/',
               builder: (context, state) => const ProductsScreen(),
             ),
+            GoRoute(
+              path: '/product/:id',
+              builder: (context, state) => ProductScreen(
+                productId: state.pathParameters['id'] ?? 'no-id',
+              ),
+            ),
           ],
           redirect: (context, state) {
-            final isGoingTo = state.subloc;
+            final isGoingTo = state.matchedLocation;
             final authStatus = goRouterNotifier.authStatus;
 
             if (isGoingTo == '/splash' && authStatus == AuthStatus.checking) {
