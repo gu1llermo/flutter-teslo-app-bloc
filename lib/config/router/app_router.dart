@@ -36,7 +36,7 @@ class AppRouterCubit extends Cubit<GoRouter> {
             ),
           ],
           redirect: (context, state) {
-            final isGoingTo = state.subloc;
+            final isGoingTo = state.matchedLocation;
             final authStatus = goRouterNotifier.authStatus;
 
             if (isGoingTo == '/splash' && authStatus == AuthStatus.checking) {
@@ -44,8 +44,9 @@ class AppRouterCubit extends Cubit<GoRouter> {
             }
 
             if (authStatus == AuthStatus.notAuthenticated) {
-              if (isGoingTo == '/login' || isGoingTo == '/register')
+              if (isGoingTo == '/login' || isGoingTo == '/register') {
                 return null;
+              }
 
               return '/login';
             }
